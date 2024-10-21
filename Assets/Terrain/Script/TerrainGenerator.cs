@@ -1,13 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter))]
 public class TerrainGenerator : MonoBehaviour
 {
-
     TerrainParent terrain;
+
     public void GenerateMesh(TerrainParent terrain)
     {
         this.terrain = terrain;
@@ -28,7 +27,6 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         List<int> triangles = new List<int>();
-        
 
         for (int i = 0; i < terrain.gridSize - 1; i++)
         {
@@ -73,45 +71,49 @@ public class TerrainGenerator : MonoBehaviour
 
         if (terrain.water)
             mesh.SetTriangles(waterTris, 1);
-        
+
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
 
         GetComponent<MeshFilter>().mesh = mesh;
-
     }
 
+    // Méthode pour calculer la hauteur du terrain
     private float GetHeight(int x, int z)
     {
         float height = 0;
 
         float amplitude = 1;
-        float frequence = terrain.perlinScale;
+        float frequency = terrain.perlinScale;
 
         float step = terrain.meshSize / (terrain.gridSize - 1);
         Vector3 worldPos = new Vector3(x * step + transform.position.x, 0, z * step + transform.position.z);
 
         for (int i = 0; i < terrain.octaveCount; i++)
         {
-            height += Mathf.PerlinNoise(worldPos.x * frequence + terrain.seed, worldPos.z * frequence + terrain.seed) * amplitude;
+            height += Mathf.PerlinNoise(worldPos.x * frequency + terrain.seed, worldPos.z * frequency + terrain.seed) * amplitude;
 
-            frequence /= terrain.lacunarity;
+            frequency /= terrain.lacunarity;
             amplitude *= terrain.persistence;
         }
+
+        height = Mathf.Floor(height / terrain.terraceStep) * terrain.terraceStep;
 
         if (!terrain.islandify)
             return height * terrain.heightMultiplier;
 
         Vector2 center = new Vector2(terrain.meshSize / 2, terrain.meshSize / 2);
-
-       
         Vector2 vertexPos = new Vector2(x * step, z * step);
 
         float distance = Vector2.Distance(center, vertexPos);
-        float normalizedistance = Mathf.Clamp01(distance / (terrain.meshSize / 2));
+        float normalizedDistance = Mathf.Clamp01(distance / (terrain.meshSize / 2));
 
-        return height * (1 - normalizedistance) * terrain.heightMultiplier;
-
+        return height * (1 - normalizedDistance) * terrain.heightMultiplier;
     }
-    
+    public MeshRenderer GetMeshRenderer()
+    {
+        return terrain.meshRenderer;
+    }
+
 }
+    

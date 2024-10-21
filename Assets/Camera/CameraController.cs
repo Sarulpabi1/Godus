@@ -78,6 +78,7 @@ public class CameraMovement : MonoBehaviour
         UpdateCameraPosition();
         UpdateBasePosition();
         
+        
     }
     private void UpdateVelocity()
     {
@@ -121,7 +122,6 @@ public class CameraMovement : MonoBehaviour
             horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero, Time.deltaTime * damping);
             transform.position += horizontalVelocity * Time.deltaTime;
         }
-
         targetPosition = Vector3.zero;
     }
 
