@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class BuildManager : MonoBehaviour
 {
     public BuildingData buildingData;
-    public BuildManager instance;
+    public static BuildManager instance;
     public List<BuildingData> activeBuilds = new List<BuildingData>();
 
     private Dictionary<RessourceData, int> globalRessourceStock = new Dictionary<RessourceData, int>();
