@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class BuildManager : MonoBehaviour
-{    
-    public static BuildManager instance;
 
     public List<BuildingData> availableBuilds;
 
