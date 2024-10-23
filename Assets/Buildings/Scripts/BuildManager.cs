@@ -5,11 +5,13 @@ using UnityEngine;
 
 
 public class BuildManager : MonoBehaviour
-{
-    public BuildingData buildingData;
-    public BuildManager instance;
-    public List<BuildingData> activeBuilds = new List<BuildingData>();
+{    
+    public static BuildManager instance;
 
+    public List<BuildingData> availableBuilds;
+
+    public BuildingData selectedBuild;
+    private List<BuildingData> activeBuilds = new List<BuildingData>();
     private Dictionary<RessourceData, int> globalRessourceStock = new Dictionary<RessourceData, int>();
 
     private void Awake()
@@ -21,7 +23,8 @@ public class BuildManager : MonoBehaviour
         }
         else 
             Destroy(gameObject);
-            
+
+        GetBuildSelected();
     }
 
     public void PlaceBuild(BuildingData build)
@@ -68,5 +71,20 @@ public class BuildManager : MonoBehaviour
             return globalRessourceStock[resourceType];
         }
         return 0;
+    }
+
+    public void BuildSelection(int index)
+    {
+        selectedBuild = availableBuilds[index];
+    }
+
+    private BuildingData GetBuildSelected()
+    {
+        if (selectedBuild == null && availableBuilds.Count > 0)
+        {
+            selectedBuild = availableBuilds[0];
+        }
+
+        return selectedBuild;
     }
 }
