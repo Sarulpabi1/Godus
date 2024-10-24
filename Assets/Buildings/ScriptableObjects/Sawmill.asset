@@ -16,8 +16,9 @@ MonoBehaviour:
   width: 0
   height: 0
   level: 0
-  buildingModel: {fileID: 0}
-  ressourceData: {fileID: 0}
+  buildingModel: {fileID: 4515704167269575234, guid: b1a42978bcb523a42929a3609a0be79e,
+    type: 3}
+  ressourceData: {fileID: 11400000, guid: cde54aecce31d8948b615c27436a3fd4, type: 2}
   ressourceGenerationInterval: 5
   ressourceAmountPerInterval: 1
   maxCapacity: 100
