@@ -11,9 +11,13 @@ public class BuildManager : MonoBehaviour
     public List<BuildingData> availableBuilds;
 
     private BuildingData selectedBuild;
+    public BuildingGrid buildingGrid;
 
     private void Awake()
     {
+        int resolution = buildingGrid.gridResolution;
+        float cellSize = buildingGrid.cellSize;
+
         if (instance == null)
         {
             instance = this;
@@ -25,14 +29,28 @@ public class BuildManager : MonoBehaviour
         GetBuildSelected();
     }
 
-    public void PlaceBuild(Vector3 position)
+    public bool PlaceBuild(Vector3 position)
     {
+        
         BuildingData buildingData = GetBuildSelected();
 
-        GameObject newBuildingObject = Instantiate(buildingData.buildingModel, position, Quaternion.identity);
+        if (buildingData == null)
+        {
+            return false;
+        }
 
-        Building buildingComponent = newBuildingObject.AddComponent<Building>();
-        buildingComponent.InitializeBuilding(buildingData);
+        if (buildingGrid != null)
+        {
+            if (buildingGrid.CanPlaceBuilding(position, buildingData))
+            {
+                GameObject newBuildingObject = Instantiate(buildingData.buildingModel, position, Quaternion.identity);
+
+                Building buildingComponent = newBuildingObject.AddComponent<Building>();
+                buildingComponent.InitializeBuilding(buildingData);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void BuildSelection(int index)

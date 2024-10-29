@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -14,6 +15,7 @@ public class TerrainParent : MonoBehaviour
     public float heightMultiplier;
     public const int ChunkSize = 32;
 
+
     [Header("   Perlin Options")]
     [Range(0, 1)] public float perlinScale;
     [Range(0, 1)] public float lacunarity;
@@ -27,7 +29,26 @@ public class TerrainParent : MonoBehaviour
     public float waterLevel = 0;
     public int seed = 0;
 
-    
+    public int gridResolution;
+    public static TerrainParent instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        foreach (Transform child in transform)
+        {
+            if (child.TryGetComponent(out BuildingGrid buildingGrid))
+            {
+                if (buildingGrid != null && TerrainGenerator.instance != null)
+                {
+                    int gridResolution = buildingGrid.gridResolution;
+                    float cellSize = buildingGrid.cellSize;
+                    buildingGrid.InitializeGrid(gridResolution, cellSize, TerrainGenerator.instance);
+                }
+            }
+        }
+    }
 
     void Update()
     {

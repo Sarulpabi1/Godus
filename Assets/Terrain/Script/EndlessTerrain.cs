@@ -28,6 +28,7 @@ public class EndlessTerrain : MonoBehaviour
         {
             Debug.LogError("Player n'est pas assigné dans le script InfiniteTerrainGenerator.");
         }
+        
 
     }
 
@@ -94,6 +95,8 @@ public class EndlessTerrain : MonoBehaviour
 
         TerrainGenerator terrainGenerator = newChunk.AddComponent<TerrainGenerator>();
         MeshRenderer meshRenderer = newChunk.AddComponent<MeshRenderer>();
+        BuildingGrid buildingGrid = newChunk.AddComponent<BuildingGrid>();
+
         meshRenderer.SetMaterials(materials);
         terrainGenerator.GenerateMesh(terrainParent);
 

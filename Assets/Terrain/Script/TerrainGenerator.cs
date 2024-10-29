@@ -6,11 +6,18 @@ using UnityEngine;
 public class TerrainGenerator : MonoBehaviour
 {
     TerrainParent terrain;
+    Vector3[,] heightMap;
+    public static TerrainGenerator instance;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
     public void GenerateMesh(TerrainParent terrain)
     {
         this.terrain = terrain;
-        Vector3[,] heightMap = new Vector3[terrain.gridSize, terrain.gridSize];
+        heightMap = new Vector3[terrain.gridSize, terrain.gridSize];
 
         List<Vector3> vertices = new List<Vector3>();
 
@@ -76,6 +83,15 @@ public class TerrainGenerator : MonoBehaviour
         mesh.RecalculateNormals();
 
         GetComponent<MeshFilter>().mesh = mesh;
+    }
+
+    public float GetHeightAtGridPoint(int x, int z)
+    {
+        if (x < 0 || z < 0 || x >= terrain.gridSize || z >= terrain.gridSize)
+        {
+            return 0;
+        }
+        return heightMap[x, z].y;
     }
 
     // Méthode pour calculer la hauteur du terrain
