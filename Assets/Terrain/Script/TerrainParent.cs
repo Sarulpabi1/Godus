@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class TerrainParent : MonoBehaviour
     [Range(1, 256)] public int gridSize;
     [Range(0f, 32f)] public float meshSize;
     public float heightMultiplier;
-    public const int ChunkSize = 32;
+
 
     [Header("   Perlin Options")]
     [Range(0, 1)] public float perlinScale;
@@ -27,11 +28,8 @@ public class TerrainParent : MonoBehaviour
     public float waterLevel = 0;
     public int seed = 0;
 
-    
-
     void Update()
     {
-
         foreach (Transform child in transform)
         {
             if (Application.isPlaying)
@@ -44,4 +42,4 @@ public class TerrainParent : MonoBehaviour
         }
     }
 
-}
+    }
