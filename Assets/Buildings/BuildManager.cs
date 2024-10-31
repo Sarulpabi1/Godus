@@ -27,9 +27,16 @@ public class BuildManager : MonoBehaviour
 
     public void PlaceBuild(Vector3 position)
     {
-        BuildingData buildingData = GetBuildSelected();
+        Vector2Int cellCoords = BuildingGrid.instance.GetGridCoordinates(position);
 
-        GameObject newBuildingObject = Instantiate(buildingData.buildingModel, position, Quaternion.identity);
+        if (BuildingGrid.instance.IsCellOccupied(cellCoords))
+            return;
+
+        BuildingData buildingData = GetBuildSelected();
+        Vector3 cellPosition = BuildingGrid.instance.GetWorldPosition(cellCoords);
+
+        GameObject newBuildingObject = Instantiate(buildingData.buildingModel, cellPosition, Quaternion.identity);
+        BuildingGrid.instance.PlaceBuildingInCell(cellCoords, buildingData);
 
         Building buildingComponent = newBuildingObject.AddComponent<Building>();
         buildingComponent.InitializeBuilding(buildingData);
