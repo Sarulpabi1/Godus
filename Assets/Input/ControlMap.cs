@@ -141,12 +141,12 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""PlaceBuilding"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""0f66c714-c6b0-4007-889a-e8e327872f22"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -154,7 +154,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""80965308-5ba0-494b-ab15-45546a24e322"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PlaceBuilding"",
