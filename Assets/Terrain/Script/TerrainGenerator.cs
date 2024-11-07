@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using TreeEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
@@ -7,9 +10,31 @@ public class TerrainGenerator : MonoBehaviour
 {
     TerrainParent terrain;
 
-    public void GenerateMesh(TerrainParent terrain)
+    volatile Action makeMesh;
+
+    private Vector3 transformPosition;
+
+    Thread thread;
+
+    public void GenerateTerrain(TerrainParent terrain)
     {
         this.terrain = terrain;
+
+        thread = new Thread(GenerateMesh);
+        transformPosition = transform.position;
+        thread.Start();
+    }
+
+    private void Update()
+    {
+        if (makeMesh != null)
+        {
+            makeMesh();
+            makeMesh = null;
+        }
+    }
+    public void GenerateMesh()
+    {
         Vector3[,] heightMap = new Vector3[terrain.gridSize, terrain.gridSize];
 
         List<Vector3> vertices = new List<Vector3>();
@@ -62,20 +87,23 @@ public class TerrainGenerator : MonoBehaviour
             waterTris.Add(vertices.Count - 1);
         }
 
-        Mesh mesh = new Mesh();
+        makeMesh = () =>
+        {
+            Mesh mesh = new Mesh();
 
-        mesh.subMeshCount = 2;
+            mesh.subMeshCount = 2;
 
-        mesh.SetVertices(vertices);
-        mesh.SetTriangles(triangles, 0);
+            mesh.SetVertices(vertices);
+            mesh.SetTriangles(triangles, 0);
 
-        if (terrain.water)
-            mesh.SetTriangles(waterTris, 1);
+            if (terrain.water)
+                mesh.SetTriangles(waterTris, 1);
 
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+            mesh.RecalculateNormals();
 
-        GetComponent<MeshFilter>().mesh = mesh;
+            GetComponent<MeshFilter>().mesh = mesh;
+        };
     }
 
     // Méthode pour calculer la hauteur du terrain
@@ -87,7 +115,7 @@ public class TerrainGenerator : MonoBehaviour
         float frequency = terrain.perlinScale;
 
         float step = terrain.meshSize / (terrain.gridSize - 1);
-        Vector3 worldPos = new Vector3(x * step + transform.position.x, 0, z * step + transform.position.z);
+        Vector3 worldPos = new Vector3(x * step + transformPosition.x, 0, z * step + transformPosition.z);
 
         for (int i = 0; i < terrain.octaveCount; i++)
         {
