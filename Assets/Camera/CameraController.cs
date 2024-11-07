@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;  
 
 public class CameraMovement : MonoBehaviour
@@ -15,7 +14,6 @@ public class CameraMovement : MonoBehaviour
     [Header("   Horizontal Movement")]
     [SerializeField] private float maxSpeed = 5f;
     private float speed;
-    [SerializeField] private float acceleration = 10f;
     [SerializeField] private float damping = 15f;
     private Vector3 horizontalVelocity;
 
@@ -36,7 +34,7 @@ public class CameraMovement : MonoBehaviour
 
     //EdgeOfScreen
     [Header("   EdgeOfScreen")]
-    [SerializeField] private float edgeTolerance = 0.05f;
+    [SerializeField, Range(0f, 1f)] private float edgeTolerance;
     [SerializeField] private bool useScreenEdge = true;
     
 
@@ -76,9 +74,7 @@ public class CameraMovement : MonoBehaviour
         
         UpdateVelocity();
         UpdateCameraPosition();
-        UpdateBasePosition();
-        
-        
+        UpdateBasePosition();  
     }
     private void UpdateVelocity()
     {
@@ -114,7 +110,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (targetPosition.sqrMagnitude > 0.1f)
         {
-            speed = Mathf.Lerp(speed, maxSpeed, Time.deltaTime * acceleration);
+            speed = Mathf.Lerp(speed, maxSpeed, Time.deltaTime);
             transform.position += targetPosition * speed * Time.deltaTime;
         }
         else 

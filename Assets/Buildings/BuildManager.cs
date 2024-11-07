@@ -36,6 +36,7 @@ public class BuildManager : MonoBehaviour
         Vector3 cellPosition = BuildingGrid.instance.GetWorldPosition(cellCoords);
 
         GameObject newBuildingObject = Instantiate(buildingData.buildingModel, cellPosition, Quaternion.identity);
+        EntityManager.instance.VillagerInstatiation(cellPosition);
         BuildingGrid.instance.PlaceBuildingInCell(cellCoords, buildingData);
 
         Building buildingComponent = newBuildingObject.AddComponent<Building>();
