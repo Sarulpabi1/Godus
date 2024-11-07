@@ -37,7 +37,7 @@ public class TerrainParent : MonoBehaviour
 
             if (child.TryGetComponent(out TerrainGenerator chunk))
             {
-                chunk.GenerateMesh(this);
+                chunk.GenerateTerrain(this);
             }
         }
     }
