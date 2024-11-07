@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityParent : MonoBehaviour
+[CreateAssetMenu(fileName = "EntityData", menuName = "EDtF/Entity Data")]
+public class EntityParent : ScriptableObject
 {
-    [SerializeField] private float speed;
-    public EntityParent instance;
-
-    public enum IAType
+    public string entityName;
+    public float HP;
+    public float speed;
+    public GameObject Model;
+    public enum Team
     {
         Ally,
         Enemy,
         Neutral
-    }
-    private void Awake()
-    {
-        instance = this;
     }
 }

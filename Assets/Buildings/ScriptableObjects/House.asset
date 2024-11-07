@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: House
   m_EditorClassIdentifier: 
   buildName: House
-  width: 0
-  height: 0
   level: 0
-  buildingModel: {fileID: 0}
+  buildingModel: {fileID: 4734394854866819895, guid: 336dbe58e2009cb49ad7dcabe7479d15,
+    type: 3}
   ressourceData: {fileID: 11400000, guid: cde54aecce31d8948b615c27436a3fd4, type: 2}
-  ressourceGenerationInterval: 5
-  ressourceAmountPerInterval: 1
+  productionInterval: 5
+  ressourceAmountPerInterval: 3
   maxCapacity: 100
   currentStoredAmount: 0

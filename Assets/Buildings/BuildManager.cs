@@ -10,9 +10,7 @@ public class BuildManager : MonoBehaviour
 
     public List<BuildingData> availableBuilds;
 
-    public BuildingData selectedBuild;
-    private List<BuildingData> activeBuilds = new List<BuildingData>();
-    private Dictionary<RessourceData, int> globalRessourceStock = new Dictionary<RessourceData, int>();
+    private BuildingData selectedBuild;
 
     private void Awake()
     {
@@ -27,50 +25,22 @@ public class BuildManager : MonoBehaviour
         GetBuildSelected();
     }
 
-    public void PlaceBuild(BuildingData build)
+    public void PlaceBuild(Vector3 position)
     {
-        Instantiate(build);
-        activeBuilds.Add(build);
+        Vector2Int cellCoords = BuildingGrid.instance.GetGridCoordinates(position);
 
-        if (!globalRessourceStock.ContainsKey(build.ressourceData))
-        {
-            globalRessourceStock.Add(build.ressourceData, 0);
-        }
+        if (BuildingGrid.instance.IsCellOccupied(cellCoords))
+            return;
 
-        StartCoroutine(GenerateResources(build));
-    }
+        BuildingData buildingData = GetBuildSelected();
+        Vector3 cellPosition = BuildingGrid.instance.GetWorldPosition(cellCoords);
 
-    private IEnumerator GenerateResources(BuildingData build)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(build.ressourceGenerationInterval);
+        GameObject newBuildingObject = Instantiate(buildingData.buildingModel, cellPosition, Quaternion.identity);
+        EntityManager.instance.VillagerInstatiation(cellPosition);
+        BuildingGrid.instance.PlaceBuildingInCell(cellCoords, buildingData);
 
-            if (build.currentStoredAmount < build.maxCapacity)
-            {
-                int amountToGenerate = Mathf.Min(build.ressourceAmountPerInterval, build.maxCapacity - build.currentStoredAmount);
-                build.currentStoredAmount += amountToGenerate;
-            }
-        }
-    }
-
-    public int CollectResourcesFromBuild(BuildingData build)
-    {
-        int collectedAmount = build.currentStoredAmount;
-        build.currentStoredAmount = 0;
-
-        globalRessourceStock[build.ressourceData] += collectedAmount;
-
-        return collectedAmount;
-    }
-
-    public int GetGlobalResourceAmount(RessourceData resourceType)
-    {
-        if (globalRessourceStock.ContainsKey(resourceType))
-        {
-            return globalRessourceStock[resourceType];
-        }
-        return 0;
+        Building buildingComponent = newBuildingObject.AddComponent<Building>();
+        buildingComponent.InitializeBuilding(buildingData);
     }
 
     public void BuildSelection(int index)
