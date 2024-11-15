@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2653f2b768b6f4342837d11b94b304d5, type: 3}
   m_Name: Sawmill
   m_EditorClassIdentifier: 
-  buildName: 
-  width: 0
-  height: 0
+  buildName: Sawmill
   level: 0
   buildingModel: {fileID: 4515704167269575234, guid: b1a42978bcb523a42929a3609a0be79e,
     type: 3}
   ressourceData: {fileID: 11400000, guid: cde54aecce31d8948b615c27436a3fd4, type: 2}
-  ressourceGenerationInterval: 5
+  amountOfResourcesNeeded: 50
+  productionInterval: 2
   ressourceAmountPerInterval: 1
   maxCapacity: 100
   currentStoredAmount: 0

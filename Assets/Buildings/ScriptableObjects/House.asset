@@ -17,6 +17,7 @@ MonoBehaviour:
   buildingModel: {fileID: 4734394854866819895, guid: 336dbe58e2009cb49ad7dcabe7479d15,
     type: 3}
   ressourceData: {fileID: 11400000, guid: cde54aecce31d8948b615c27436a3fd4, type: 2}
+  amountOfResourcesNeeded: 50
   productionInterval: 5
   ressourceAmountPerInterval: 3
   maxCapacity: 100
