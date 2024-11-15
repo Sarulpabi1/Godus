@@ -7,7 +7,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
 public class TerrainGenerator : MonoBehaviour
-{
+{   
     TerrainParent terrain;
 
     volatile Action makeMesh;
@@ -103,11 +103,13 @@ public class TerrainGenerator : MonoBehaviour
             mesh.RecalculateNormals();
 
             GetComponent<MeshFilter>().mesh = mesh;
+
+
         };
     }
 
     // Méthode pour calculer la hauteur du terrain
-    private float GetHeight(int x, int z)
+    public float GetHeight(int x, int z)
     {
         float height = 0;
 
@@ -143,5 +145,15 @@ public class TerrainGenerator : MonoBehaviour
         return terrain.meshRenderer;
     }
 
+    public float GetHeightAtPosition(Vector3 worldPosition)
+    {
+        int x = Mathf.RoundToInt(worldPosition.x / terrain.meshSize * (terrain.gridSize - 1));
+        int z = Mathf.RoundToInt(worldPosition.z / terrain.meshSize * (terrain.gridSize - 1));
+
+        x = Mathf.Clamp(x, 0, terrain.gridSize - 1);
+        z = Mathf.Clamp(z, 0, terrain.gridSize - 1);
+
+        return GetHeight(x, z);
+    }
 }
     

@@ -71,6 +71,7 @@ public class EndlessTerrain : MonoBehaviour
     private void GenerateChunk(Vector2Int chunkCoord)
     {
         GameObject chunkObject = Instantiate(chunkPrefab, new Vector3(chunkCoord.x * terrainParent.meshSize, 0, chunkCoord.y * terrainParent.meshSize), Quaternion.identity);
+        chunkObject.name = $"Chunk_ {chunkCoord}";
         chunkObject.transform.parent = transform;
 
         TerrainGenerator chunk = chunkObject.GetComponent<TerrainGenerator>();
@@ -78,4 +79,16 @@ public class EndlessTerrain : MonoBehaviour
 
         generatedChunks.Add(chunkCoord, chunkObject);
     }
+
+    public float GetHeightAtPosition(Vector3 worldPosition)
+    {
+        Vector2Int chunkCoord = GetChunkCoordFromPosition(worldPosition);
+        if (generatedChunks.ContainsKey(chunkCoord))
+        {
+            TerrainGenerator chunk = generatedChunks[chunkCoord].GetComponent<TerrainGenerator>();
+            return chunk.GetHeightAtPosition(worldPosition);
+        }
+        return 0;
+    }
 }
+

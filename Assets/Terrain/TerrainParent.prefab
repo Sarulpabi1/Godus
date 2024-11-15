@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 8353014863803843735}
   - component: {fileID: 9068484181849149392}
   - component: {fileID: 3916994299916958225}
+  - component: {fileID: 8569409554791115208}
   m_Layer: 0
   m_Name: TerrainParent
   m_TagString: Untagged
@@ -149,7 +150,6 @@ MonoBehaviour:
   gridSize: 159
   meshSize: 32
   heightMultiplier: 3
-  ChunkSize: 32
   perlinScale: 0.12
   lacunarity: 1
   persistence: 0.1
@@ -159,10 +159,6 @@ MonoBehaviour:
   water: 1
   waterLevel: 1
   seed: 3
-  chunkPrefab: {fileID: 5756495176221132502, guid: c6cb2819763b5f44f88071a4c70466e1,
-    type: 3}
-  player: {fileID: 8865267475404782190, guid: c6cb2819763b5f44f88071a4c70466e1, type: 3}
-  renderDistance: 5
 --- !u!114 &3916994299916958225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,3 +176,18 @@ MonoBehaviour:
     type: 3}
   player: {fileID: 0}
   renderDistance: 5
+--- !u!114 &8569409554791115208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481968744806987500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7ea818ebcbe7a42a14e830c7ab3683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: {x: 10, y: 10}
+  cellSize: 1
+  gridColor: {r: 0, g: 1, b: 0, a: 1}
