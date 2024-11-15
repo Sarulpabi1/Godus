@@ -74,7 +74,7 @@ public class EndlessTerrain : MonoBehaviour
         chunkObject.transform.parent = transform;
 
         TerrainGenerator chunk = chunkObject.GetComponent<TerrainGenerator>();
-        chunk.GenerateMesh(terrainParent);
+        chunk.GenerateTerrain(terrainParent);
 
         generatedChunks.Add(chunkCoord, chunkObject);
     }
