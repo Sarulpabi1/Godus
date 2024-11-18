@@ -8,6 +8,8 @@ public class CameraMovement : MonoBehaviour
 {
 
     private Transform cameraTransform;
+    private ControlMap controlMap;
+    private InputAction inputAction;
 
 
     //Movement (Horizontal)
@@ -44,6 +46,7 @@ public class CameraMovement : MonoBehaviour
     private void Awake()
     {
         InputManager.ControlMap = new ControlMap();
+        controlMap = InputManager.ControlMap;
         cameraTransform = this.GetComponentInChildren<Camera>().transform;
     }
 
@@ -53,17 +56,17 @@ public class CameraMovement : MonoBehaviour
         cameraTransform.LookAt(this.transform);
 
         lastPosition = this.transform.position;
-        InputManager.InputAction = InputManager.ControlMap.Camera.Movement;
-        InputManager.ControlMap.Camera.Rotation.performed += RotateCamera;
-        InputManager.ControlMap.Camera.Zoom.performed += ZoomCamera;
-        InputManager.ControlMap.Camera.Enable();
+        inputAction = InputManager.ControlMap.Camera.Movement;
+        controlMap.Camera.Rotation.performed += RotateCamera;
+        controlMap.Camera.Zoom.performed += ZoomCamera;
+        controlMap.Camera.Enable();
     }
 
     private void OnDisable()
     {
-        InputManager.ControlMap.Camera.Rotation.performed -= RotateCamera;
-        InputManager.ControlMap.Camera.Zoom.performed -= ZoomCamera;
-        InputManager.ControlMap.Camera.Disable();
+        controlMap.Camera.Rotation.performed -= RotateCamera;
+        controlMap.Camera.Zoom.performed -= ZoomCamera;
+        controlMap.Camera.Disable();
     }
 
     private void Update()
@@ -85,7 +88,7 @@ public class CameraMovement : MonoBehaviour
 
     private void GetKeyboardMovement()
     {
-        Vector3 inputValue = InputManager.InputAction.ReadValue<Vector2>().x * GetCameraRight() + InputManager.InputAction.ReadValue<Vector2>().y * GetCameraForward();
+        Vector3 inputValue = inputAction.ReadValue<Vector2>().x * GetCameraRight() + inputAction.ReadValue<Vector2>().y * GetCameraForward();
         inputValue = inputValue.normalized;
 
         if (inputValue.sqrMagnitude > 0.1f)

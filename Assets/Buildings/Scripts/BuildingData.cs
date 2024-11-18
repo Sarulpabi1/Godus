@@ -9,6 +9,7 @@ public class BuildingData : ScriptableObject
     public int level;
     public GameObject buildingModel;
     public RessourceData ressourceData;
+    public int amountOfResourcesNeeded;
 
     [Header("   Ressource Generation")]
     public float productionInterval = 2;

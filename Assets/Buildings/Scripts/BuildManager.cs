@@ -11,7 +11,7 @@ public class BuildManager : MonoBehaviour
     public List<BuildingData> availableBuilds;
 
     private BuildingData selectedBuild;
-
+    public ResourceManager resourceManager;
     private void Awake()
     {
         if (instance == null)
@@ -29,10 +29,20 @@ public class BuildManager : MonoBehaviour
     {
         Vector2Int cellCoords = BuildingGrid.instance.GetGridCoordinates(position);
 
-        if (BuildingGrid.instance.IsCellOccupied(cellCoords))
-            return;
-
         BuildingData buildingData = GetBuildSelected();
+
+        if (BuildingGrid.instance.IsCellOccupied(cellCoords))
+        {
+            print("Cell is occupied");
+            return;
+        }
+
+        if (resourceManager.currentResources < selectedBuild.amountOfResourcesNeeded)
+        {
+            print("Not enough resources");
+            return;
+        }
+
         Vector3 cellPosition = BuildingGrid.instance.GetWorldPosition(cellCoords);
 
         GameObject newBuildingObject = Instantiate(buildingData.buildingModel, cellPosition, Quaternion.identity);
@@ -41,6 +51,8 @@ public class BuildManager : MonoBehaviour
 
         Building buildingComponent = newBuildingObject.AddComponent<Building>();
         buildingComponent.InitializeBuilding(buildingData);
+        resourceManager.currentResources -= selectedBuild.amountOfResourcesNeeded;
+        
     }
 
     public void BuildSelection(int index)

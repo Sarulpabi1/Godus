@@ -12,10 +12,12 @@ public class Pathfinding : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 initialPosition;
     private Building targetBuilding;
+    private ResourceManager resourceManager;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        resourceManager = ResourceManager.instance;
         initialPosition = transform.position;
         StartCoroutine(Patrol());
     }
@@ -37,6 +39,8 @@ public class Pathfinding : MonoBehaviour
                 }
 
                 int collectedResources = targetBuilding.CollectResources();
+                resourceManager.currentResources += collectedResources;
+                collectedResources = 0;
             }
             else 
             {

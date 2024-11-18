@@ -145,6 +145,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1532159138}
+    - target: {fileID: 3916994299916958225, guid: 42430c1c49020934daedd783fa50a641,
+        type: 3}
+      propertyPath: chunkPrefab
+      value: 
+      objectReference: {fileID: 245759169}
     - target: {fileID: 6863966685503717924, guid: 42430c1c49020934daedd783fa50a641,
         type: 3}
       propertyPath: player
@@ -233,7 +238,7 @@ PrefabInstance:
     - target: {fileID: 9068484181849149392, guid: 42430c1c49020934daedd783fa50a641,
         type: 3}
       propertyPath: lacunarity
-      value: 0.6
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 9068484181849149392, guid: 42430c1c49020934daedd783fa50a641,
         type: 3}
@@ -271,6 +276,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42430c1c49020934daedd783fa50a641, type: 3}
+--- !u!1 &245759169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3165700814138036040, guid: 42430c1c49020934daedd783fa50a641,
+    type: 3}
+  m_PrefabInstance: {fileID: 101973641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
