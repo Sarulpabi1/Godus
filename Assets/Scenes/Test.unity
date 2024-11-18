@@ -460,7 +460,7 @@ PrefabInstance:
     - target: {fileID: 4586313427826678515, guid: d9276f2f55e24fb44afb2efd2a385f95,
         type: 3}
       propertyPath: useScreenEdge
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5683809901397990616, guid: d9276f2f55e24fb44afb2efd2a385f95,
         type: 3}
@@ -523,7 +523,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5736823317862021753, guid: d9276f2f55e24fb44afb2efd2a385f95, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9276f2f55e24fb44afb2efd2a385f95, type: 3}
@@ -747,7 +748,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524910576}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19e3e5fec4dfa2e42898ae6399d982ce, type: 3}
   m_Name: 
