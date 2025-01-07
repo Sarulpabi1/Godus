@@ -134,7 +134,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1532159138}
+      objectReference: {fileID: 0}
     - target: {fileID: 3504408471267772220, guid: 42430c1c49020934daedd783fa50a641,
         type: 3}
       propertyPath: m_Mesh
@@ -144,7 +144,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1532159138}
+      objectReference: {fileID: 543894736}
     - target: {fileID: 3916994299916958225, guid: 42430c1c49020934daedd783fa50a641,
         type: 3}
       propertyPath: chunkPrefab
@@ -154,7 +154,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1532159138}
+      objectReference: {fileID: 0}
     - target: {fileID: 6863966685503717924, guid: 42430c1c49020934daedd783fa50a641,
         type: 3}
       propertyPath: renderDistance
@@ -169,7 +169,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 616320655}
+      objectReference: {fileID: 0}
     - target: {fileID: 8353014863803843735, guid: 42430c1c49020934daedd783fa50a641,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -229,7 +229,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1532159138}
+      objectReference: {fileID: 0}
     - target: {fileID: 9068484181849149392, guid: 42430c1c49020934daedd783fa50a641,
         type: 3}
       propertyPath: islandify
@@ -537,9 +537,9 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!4 &616320655 stripped
+--- !u!4 &543894736 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1140100917646555253, guid: d9276f2f55e24fb44afb2efd2a385f95,
+  m_CorrespondingSourceObject: {fileID: 548373723214813109, guid: d9276f2f55e24fb44afb2efd2a385f95,
     type: 3}
   m_PrefabInstance: {fileID: 8580236335599835300}
   m_PrefabAsset: {fileID: 0}
@@ -771,12 +771,6 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 8580236335599835300}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1532159138 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1673403008809665274, guid: d9276f2f55e24fb44afb2efd2a385f95,
-    type: 3}
-  m_PrefabInstance: {fileID: 8580236335599835300}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1557994053
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,8 +992,18 @@ PrefabInstance:
       objectReference: {fileID: 1455293713}
     - target: {fileID: 4586313427826678515, guid: d9276f2f55e24fb44afb2efd2a385f95,
         type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586313427826678515, guid: d9276f2f55e24fb44afb2efd2a385f95,
+        type: 3}
+      propertyPath: minHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586313427826678515, guid: d9276f2f55e24fb44afb2efd2a385f95,
+        type: 3}
       propertyPath: useScreenEdge
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5683809901397990616, guid: d9276f2f55e24fb44afb2efd2a385f95,
         type: 3}
